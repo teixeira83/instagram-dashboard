@@ -1,0 +1,7 @@
+@import './elements/base.css';
+@import './settings/gaps.css';
+
+@import './settings/colors.css';
+
+@import './container/sidemenu.css';
+@import './container/dashboard.css';

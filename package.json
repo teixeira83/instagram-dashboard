@@ -1,0 +1,25 @@
+{
+  "name": "instagram-dashboard",
+  "version": "1.0.0",
+  "description": "a dashboard for instragram app",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teixeira83/instagram-dashboard.git"
+  },
+  "author": "Rafael Alves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teixeira83/instagram-dashboard/issues"
+  },
+  "homepage": "https://github.com/teixeira83/instagram-dashboard#readme",
+  "dependencies": {
+    "electron": "^9.0.0"
+  },
+  "devDependencies": {
+    "electron-reload": "^1.5.0"
+  }
+}

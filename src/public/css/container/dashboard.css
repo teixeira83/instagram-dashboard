@@ -1,0 +1,36 @@
+.dashboard {
+    width: 100%;
+}
+
+.dashboard-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25%;
+}
+
+.dashboard-header > h1 {
+    font-size: 35px;
+}
+
+.dashboard-body {
+    display: flex;
+    margin-left: var(--gap-small);
+    margin-right: var(--gap-small);
+    margin-top: var(--gap-bigger);
+}
+
+.dashboard-counters {
+    width: 30%;
+    text-align: center;
+}
+
+.dashboard-counters > h1 { 
+    font-size: 25px;
+    margin-bottom: var(--gap-big);
+}
+
+.dashboard-counters > span { 
+    font-size: 25px;
+} 
