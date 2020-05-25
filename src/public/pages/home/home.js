@@ -1,8 +1,8 @@
-const login = require('../utils/login');
+const operations = require('../../../utils/operations');
 
 ;(async () => {
 
-    const user = await login.login().then(res => {
+    const user = await operations.login().then(res => {
         console.log(res)
         let user = {
             name: res.username,
@@ -24,7 +24,6 @@ const login = require('../utils/login');
     
     imgProfile.src = user.picture;
     profileUsername.innerHTML = user.name;
-    username.innerHTML = `@${user.name}`;
     username.innerHTML = `@${user.name}`;
     countPub.innerHTML = user.pub;
     countFollower.innerHTML = user.followers;

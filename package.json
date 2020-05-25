@@ -19,7 +19,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "electron": "^9.0.0",
-    "instagram-web-api": "^2.2.0"
+    "instagram-web-api": "^2.2.0",
+    "tough-cookie-filestore2": "^1.0.0"
   },
   "devDependencies": {
     "electron-reload": "^1.5.0"

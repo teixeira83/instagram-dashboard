@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet">
+  </head>
+  <body>
+    <section class="side-menu-bar">
+        <h1>PROJECT DASHBOARD</h1>
+        <div class="profile">
+            <img id="img-profile" src="../../assets/profile.png" alt="foto do perfil">
+            <div class="profile-text">
+                <h3 id="profile-username">username</h3>
+            </div>
+        </div>
+    
+        <div class="container-menu">
+            <h4 class="subtitle">MENU</h4>
+
+            <ul class="menu-list">
+                <li>
+                    <i id="teste" class="fas fa-house-user"></i>
+                    <a href="home.html">Home</a>
+                </li>
+                <li>
+                    <i class="fas fa-at"></i>
+                    <a href="../followers/follower.html">Followers</a>
+                </li>
+                <li>
+                    <i class="fas fa-at"></i>
+                    <a>Following</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="dashboard">
+        <div class="dashboard-header">
+            <h1 id="username">@username</h1>
+        </div>
+
+        <div class=dashboard-body>
+            <div class="dashboard-counters">
+                <h1>Publicações</h1>
+                <span id="pub-count">0</span>
+            </div>
+    
+            <div class="dashboard-counters">
+                <h1>Seguidores</h1>
+                <span id="follower-count">0</span>
+            </div>
+    
+            <div class="dashboard-counters">
+                <h1>Seguindo</h1>
+                <span id="following-count">0</span>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="home.js"></script>
+  </body>
+</html>

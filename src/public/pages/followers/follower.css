@@ -1,0 +1,32 @@
+@import '../../css/elements/base.css';
+@import '../../css/settings/gaps.css';
+@import '../../css/settings/colors.css';
+@import '../../css/container/sidemenu.css';
+
+.followers {
+    width: 100%;
+}
+
+.followers-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25%;
+    font-size: 35px;
+}
+
+.follower {
+    width: 80%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.follower > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
