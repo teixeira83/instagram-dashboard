@@ -51,4 +51,10 @@
 
 .menu-list a{
     margin-left: var(--gap-smaller);
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu-list a:hover{
+   border-bottom: 3px solid var(--color-second); 
 }

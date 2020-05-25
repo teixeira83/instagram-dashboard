@@ -2,9 +2,9 @@
   "name": "instagram-dashboard",
   "version": "1.0.0",
   "description": "a dashboard for instragram app",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "electron ./src"
+    "start": "electron ./src/main.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/teixeira83/instagram-dashboard#readme",
   "dependencies": {
-    "electron": "^9.0.0"
+    "dotenv": "^8.2.0",
+    "electron": "^9.0.0",
+    "instagram-web-api": "^2.2.0"
   },
   "devDependencies": {
     "electron-reload": "^1.5.0"

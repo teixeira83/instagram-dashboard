@@ -13,10 +13,9 @@
     <section class="side-menu-bar">
         <h1>PROJECT DASHBOARD</h1>
         <div class="profile">
-            <img src="./assets/profile-img.jpg" alt="foto do perfil">
+            <img id="img-profile" src="./assets/profile.png" alt="foto do perfil">
             <div class="profile-text">
-                <h3>Rafael Alves</h3>
-                <p>Dev FullStack</p>
+                <h3 id="profile-username">username</h3>
             </div>
         </div>
     
@@ -26,7 +25,7 @@
             <ul class="menu-list">
                 <li>
                     <i id="teste" class="fas fa-house-user"></i>
-                    <a>Home</a>
+                    <a href="index.html">Home</a>
                 </li>
                 <li>
                     <i class="fas fa-at"></i>
@@ -42,25 +41,26 @@
 
     <section class="dashboard">
         <div class="dashboard-header">
-            <h1>@rafaelteixeira91</h1>
+            <h1 id="username">@username</h1>
         </div>
 
         <div class=dashboard-body>
             <div class="dashboard-counters">
                 <h1>Publicações</h1>
-                <span>44</span>
+                <span id="pub-count">0</span>
             </div>
     
             <div class="dashboard-counters">
                 <h1>Seguidores</h1>
-                <span>313</span>
+                <span id="follower-count">0</span>
             </div>
     
             <div class="dashboard-counters">
                 <h1>Seguindo</h1>
-                <span>517</span>
+                <span id="following-count">0</span>
             </div>
         </div>
     </section>
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
