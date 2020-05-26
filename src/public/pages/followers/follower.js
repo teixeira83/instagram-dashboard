@@ -1,4 +1,5 @@
 const operations = require('../../../utils/operations');
+const createDiv = require('../../../utils/buildFollowerDiv');
 
 ;(async () => {
 
@@ -29,28 +30,12 @@ const operations = require('../../../utils/operations');
     
     
     for ( let i = 0; i < 10; i++) {
-        let newBigDiv = document.createElement('div');
-        newBigDiv.className = 'follower';
-        
-        let newImg = document.createElement('img');
-        newImg.src = followers[i].profile_pic_url;
-        
-        let newSmallDiv = document.createElement('div');
-        
-        let newSpanUsername = document.createElement('span');
-        newSpanUsername.textContent = followers[i].username;
-        
-        let newSpanName = document.createElement('span');
-        newSpanName.textContent = followers[i].full_name;
-    
-        newBigDiv.appendChild(newImg);
-        newSmallDiv.appendChild(newSpanUsername);
-        newSmallDiv.appendChild(newSpanName);
-        newBigDiv.appendChild(newSmallDiv);
+       
+        let newDiv = createDiv.buildFollowerDiv(followers[i]);
     
         let [divFollowers] = document.getElementsByClassName('container-followers')
     
-        divFollowers.insertAdjacentHTML('beforeend', newBigDiv.outerHTML);
+        divFollowers.insertAdjacentHTML('beforeend', newDiv.outerHTML);
 
     }
 
