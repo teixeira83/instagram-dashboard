@@ -1,8 +1,12 @@
 .side-menu-bar {
     color: #fff;
     background-color: var(--color-first);
-    width: 30%;
+    width: var(--side-menu-bar-size);
     height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 }

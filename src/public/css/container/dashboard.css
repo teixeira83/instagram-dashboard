@@ -1,5 +1,6 @@
 .dashboard {
     width: 100%;
+    margin-left: var(--side-menu-bar-size);
 }
 
 .dashboard-header {
