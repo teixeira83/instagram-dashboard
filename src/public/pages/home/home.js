@@ -1,9 +1,10 @@
 const operations = require('../../../utils/operations');
+const resources = require('../../../utils/resources');
 
 ;(async () => {
+    
 
     const user = await operations.login().then(res => {
-        console.log(res)
         let user = {
             name: res.username,
             pub: res.edge_owner_to_timeline_media.count,
@@ -12,7 +13,7 @@ const operations = require('../../../utils/operations');
             picture: res.profile_pic_url
         }
     
-        return user
+        return user;
     });
 
     let imgProfile = document.getElementById('img-profile');
@@ -28,5 +29,5 @@ const operations = require('../../../utils/operations');
     countPub.innerHTML = user.pub;
     countFollower.innerHTML = user.followers;
     countFollowing.innerHTML = user.following;
-
+    
 })()

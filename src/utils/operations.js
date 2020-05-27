@@ -2,7 +2,8 @@ const { username, password } = require('dotenv').config().parsed;
 const Instagram = require('instagram-web-api');
 const FileCookieStore = require('tough-cookie-filestore2');
 
-const cookieStore = new FileCookieStore('../cookies.json');
+const cookieStore = new FileCookieStore('./cookies.json');
+
 const client = new Instagram({ username, password, cookieStore });
 
 module.exports = {
@@ -10,8 +11,6 @@ module.exports = {
 
         await client.login();
         const me = await client.getUserByUsername({ username });
-
-        console.log(me.id)
         return me
     },
 
