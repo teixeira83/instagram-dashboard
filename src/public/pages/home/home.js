@@ -3,18 +3,7 @@ const resources = require('../../../utils/resources');
 
 ;(async () => {
     
-
-    const user = await operations.login().then(res => {
-        let user = {
-            name: res.username,
-            pub: res.edge_owner_to_timeline_media.count,
-            followers: res.edge_followed_by.count,
-            following: res.edge_follow.count,
-            picture: res.profile_pic_url
-        }
-    
-        return user;
-    });
+    const user = await resources.getUserInfo();
 
     let imgProfile = document.getElementById('img-profile');
     let profileUsername = document.getElementById('profile-username');
