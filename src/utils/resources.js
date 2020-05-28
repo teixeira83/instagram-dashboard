@@ -1,7 +1,17 @@
 const fs = require('fs');
 const operations = require('./operations');
 
-module.exports = {
+module.exports = {  
+    async getFollowers() {
+        if (! fs.existsSync('./src/resources/followers.json') ) {
+            await this.saveFollowers();
+        }
+
+        let followers = fs.readFileSync('./src/resources/followers.json').toString();
+        
+        return JSON.parse(followers);
+    },
+
     async saveFollowers() {
     
         let userId = await this.getUserIdFromCookies();
