@@ -31,7 +31,7 @@ module.exports = {
                 following: res.edge_follow.count,
                 picture: res.profile_pic_url
             }
-        
+            
             return user;
         });
 
@@ -39,13 +39,12 @@ module.exports = {
     },
 
     async getUserInfo(){
-
-        if ( fs.existsSync('./src/resources/user.json') ) {
-            let user = fs.readFileSync('./src/resources/user.json').toString();
-            
-            return JSON.parse(user);
-        } else {
-            await saveUserInfo();
+        if ( ! fs.existsSync('./src/resources/user.json') ) {
+            await this.saveUserInfo();
         }
+
+        let user = fs.readFileSync('./src/resources/user.json').toString();
+        
+        return JSON.parse(user);
     }
 }
