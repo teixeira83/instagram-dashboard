@@ -13,16 +13,16 @@ const resources = require('../../../utils/resources');
     profileUsername.innerHTML = user.name;
     username.innerHTML = `@${user.name}`;
     
-    const followers = await resources.getFollowers();
+    const followings = await resources.getFollowings();
     
     
-    for ( let i = 0; i < followers.length ; i++) {
+    for ( let i = 0; i < followings.length ; i++) {
        
-        let newDiv = createDiv.buildFollowerDiv(followers[i]);
+        let newDiv = createDiv.buildFollowerDiv(followings[i]);
     
-        let [divFollowers] = document.getElementsByClassName('container-followers')
+        let [divFollowings] = document.getElementsByClassName('container-followers')
     
-        divFollowers.insertAdjacentHTML('beforeend', newDiv.outerHTML);
+        divFollowings.insertAdjacentHTML('beforeend', newDiv.outerHTML);
 
     }
 

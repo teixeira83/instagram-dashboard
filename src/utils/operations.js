@@ -33,5 +33,24 @@ module.exports = {
         }
 
         return followers;
+    },
+
+    async getFollowings(id) {
+        let client = await this.getClient();
+        let followings = [];
+        let nextPage = true;
+        let endCursor = '';
+
+        while(nextPage) {
+            let responseFollowings = await client.getFollowings({ userId: id, first: 20, after: endCursor});
+            nextPage = responseFollowings.page_info.has_next_page;
+            endCursor = responseFollowings.page_info.end_cursor;
+
+            for (f of responseFollowings.data) {
+                followings.push(f);
+            }
+        }
+
+        return followings;
     }
 }

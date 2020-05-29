@@ -20,6 +20,23 @@ module.exports = {
         fs.writeFileSync('./src/resources/followers.json', JSON.stringify(followers));
     },
 
+    async getFollowings() {
+        if (! fs.existsSync('./src/resources/followings.json') ) {
+            await this.saveFollowings();
+        }
+
+        let followings = fs.readFileSync('./src/resources/followings.json').toString();
+        
+        return JSON.parse(followings);
+    },
+
+    async saveFollowings() {
+        let userId = await this.getUserIdFromCookies();
+        let followings = await operations.getFollowings(userId);
+
+        fs.writeFileSync('./src/resources/followings.json', JSON.stringify(followings));
+    },
+
     async getUserIdFromCookies() {
         
         let cookiesFile = fs.readFileSync('./cookies.json').toString();

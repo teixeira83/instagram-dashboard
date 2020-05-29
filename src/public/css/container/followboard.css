@@ -1,7 +1,7 @@
-@import '../../css/elements/base.css';
-@import '../../css/settings/gaps.css';
-@import '../../css/settings/colors.css';
-@import '../../css/container/sidemenu.css';
+@import '../elements/base.css';
+@import '../settings/gaps.css';
+@import '../settings/colors.css';
+@import '../container/sidemenu.css';
 
 .followers {
     width: 100%;
