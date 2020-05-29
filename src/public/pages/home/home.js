@@ -1,4 +1,3 @@
-const operations = require('../../../utils/operations');
 const resources = require('../../../utils/resources');
 
 ;(async () => {

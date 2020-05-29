@@ -2,20 +2,22 @@ const { username, password } = require('dotenv').config().parsed;
 const Instagram = require('instagram-web-api');
 const FileCookieStore = require('tough-cookie-filestore2');
 
-const cookieStore = new FileCookieStore('./cookies.json');
-
-const client = new Instagram({ username, password, cookieStore });
 
 module.exports = {
-    async login() {
+    async getClient() {
+        const cookieStore = await new FileCookieStore('./cookies.json');
+        const client = await new Instagram({ username, password, cookieStore });
+        return client;
+    },
 
-        await client.login();
+    async login() {
+        let client = await this.getClient();
         const me = await client.getUserByUsername({ username });
         return me
     },
 
     async getFollowers(id) {
-        
+        let client = await this.getClient();
         let followers = [];
         let nextPage = true;
         let endCursor = '';
