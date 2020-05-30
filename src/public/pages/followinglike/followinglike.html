@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Not Follow</title>
+    <title>Following</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <link rel="stylesheet" href="../../css/reset.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
@@ -56,10 +56,26 @@
             <h1 id="username">@username</h1>
         </div>
 
+        <div class="following-search">
+            <input type="text" name="arrobasearch" id="arrobasearch">
+            <button onclick="getFollowing(arrobasearch.value)">buscar</button>
+        </div>
+
         <div class="container-followers">
             
         </div>
+
+        <div class="buttons-conatiner">
+            <button onclick="getFeed(boardUsername.textContent)">Ver Feed</button>
+            <button onclick="likePub(boardUsername.textContent)">Curtir Publicações</button>
+            <button>Descurtir Publicações</button>
+
+        </div>
+
+        <div class="feed-container">
+            
+        </div>
     </section>
-    <script type="text/javascript" src="notfollow.js"></script>
+    <script type="text/javascript" src="followinglike.js"></script>
   </body>
 </html>

@@ -53,5 +53,14 @@ module.exports = {
         }
 
         return followings;
+    },
+
+    async getFeed(username) {
+        let client = await new Instagram({ username })
+        let user = await client.getUserByUsername({ username })
+        console.log(user)
+        let pubs = user.edge_owner_to_timeline_media;   
+        
+        return pubs.edges;
     }
 }

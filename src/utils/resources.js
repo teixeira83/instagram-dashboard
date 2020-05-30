@@ -73,5 +73,22 @@ module.exports = {
             let user = fs.readFileSync('./src/resources/user.json').toString();
 
             return JSON.parse(user);
+        },
+
+        async getFollowingByUsername(username){
+            if (!fs.existsSync('./src/resources/followings.json')) {
+                await this.saveFollowings();               
+            }           
+            
+            let followingsJson = fs.readFileSync('./src/resources/followings.json').toString();
+            let followings = JSON.parse(followingsJson);
+            
+            for (const f of followings) {
+                if (f.username === username) {
+                    return f;
+                }
+            }
+            
+            return false;
         }
 }
