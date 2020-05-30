@@ -12,6 +12,7 @@ module.exports = {
 
     async login() {
         let client = await this.getClient();
+        await client.login();
         const me = await client.getUserByUsername({ username });
         return me
     },
