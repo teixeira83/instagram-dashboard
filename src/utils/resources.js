@@ -38,7 +38,6 @@ module.exports = {
         },
 
         async getUserId() {
-
             let user = fs.readFileSync('./src/resources/user.json').toString();
 
             let userId = JSON.parse(user).id;
@@ -86,8 +85,45 @@ module.exports = {
                 if (f.username === username) {
                     return f;
                 }
-            }
-            
+            }           
             return false;
+        },
+
+        async synchronize() {
+            console.log('Iniciando a sincronização com o instagram...');
+            if (fs.existsSync('./src/resources/user.json')) {
+                console.log('Apagando configurações antigas...');
+                fs.unlinkSync('./src/resources/user.json');
+                console.log('Salvando as configurações do usuário..');
+                await this.saveUserInfo();
+            } else {
+                console.log('Salvando as configurações do usuário..');
+                await this.saveUserInfo();
+            }
+            console.log('Configuração de usuário salva com sucesso.');
+            
+            if (fs.existsSync('./src/resources/followers.json')) {
+                console.log('Apagando configurações antigas...');
+                fs.unlinkSync('./src/resources/followers.json');
+                console.log('Salvando os followers..')
+                await this.saveFollowers();
+            } else {
+                console.log('Salvando os followers..')
+                await this.saveFollowers();
+            }
+            console.log('Followers salvo com sucesso.')
+
+            if (fs.existsSync('./src/resources/following.json')) {
+                console.log('Apagando configurações antigas...');
+                fs.unlinkSync('./src/resources/following.json');
+                console.log('Salvando os followings..')
+                await this.saveFollowings();
+            } else {
+                console.log('Salvando os followings..')
+                await this.saveFollowings();
+            }
+            console.log('Followings salvo com sucesso.')
+            
+            console.log('Sincronização realizada com sucesso.');
         }
 }
