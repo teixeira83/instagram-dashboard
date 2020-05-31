@@ -90,6 +90,10 @@ module.exports = {
         },
 
         async synchronize() {
+            let { buildLoader } = require('../utils/buildFollowerDiv');
+            let loader = buildLoader.create();
+            buildLoader.show(loader);
+            
             console.log('Iniciando a sincronização com o instagram...');
             if (fs.existsSync('./src/resources/user.json')) {
                 console.log('Apagando configurações antigas...');
@@ -125,5 +129,6 @@ module.exports = {
             console.log('Followings salvo com sucesso.')
             
             console.log('Sincronização realizada com sucesso.');
+            buildLoader.dismiss(loader);
         }
 }

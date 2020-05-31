@@ -33,5 +33,27 @@ module.exports = {
         newBigDiv.appendChild(newImg);
 
         return newBigDiv;
+    },
+
+    buildLoader: {  
+        create() {
+            console.log('criar')
+            let loader = document.createElement('div');
+            loader.className = 'loader';
+            loader.id='loader'
+            return loader;
+        },
+        
+        show(loader) {
+            console.log('show')
+            let [body] = document.getElementsByTagName('body');
+            body.insertAdjacentHTML('afterbegin', loader.outerHTML);
+        },
+        
+        dismiss() {
+            let [body] = document.getElementsByTagName('body');
+            let loader = document.getElementById('loader');
+            body.removeChild(loader);
+        }
     }
 }

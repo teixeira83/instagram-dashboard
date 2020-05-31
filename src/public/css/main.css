@@ -3,5 +3,7 @@
 
 @import './settings/colors.css';
 
+@import './components/loader.css';
+
 @import './container/sidemenu.css';
 @import './container/dashboard.css';
