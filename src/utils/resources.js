@@ -14,7 +14,7 @@ module.exports = {
 
         async saveFollowers() {
 
-            let userId = await this.getUserIdFromCookies();
+            let userId = await this.getUserId();
             let followers = await operations.getFollowers(userId);
 
             fs.writeFileSync('./src/resources/followers.json', JSON.stringify(followers));
@@ -31,19 +31,17 @@ module.exports = {
         },
 
         async saveFollowings() {
-            let userId = await this.getUserIdFromCookies();
+            let userId = await this.getUserId();
             let followings = await operations.getFollowings(userId);
 
             fs.writeFileSync('./src/resources/followings.json', JSON.stringify(followings));
         },
 
-        async getUserIdFromCookies() {
+        async getUserId() {
 
-            let cookiesFile = fs.readFileSync('./cookies.json').toString();
+            let user = fs.readFileSync('./src/resources/user.json').toString();
 
-            let cookies = JSON.parse(cookiesFile);
-
-            let userId = cookies['instagram.com']['/']['ds_user_id'].value;
+            let userId = JSON.parse(user).id;
 
             return userId;
         },
@@ -56,7 +54,8 @@ module.exports = {
                     pub: res.edge_owner_to_timeline_media.count,
                     followers: res.edge_followed_by.count,
                     following: res.edge_follow.count,
-                    picture: res.profile_pic_url
+                    picture: res.profile_pic_url,
+                    id: res.id
                 }
 
                 return user;
