@@ -25,13 +25,16 @@
 .dashboard-counters {
     width: 30%;
     text-align: center;
+    background-color: var(--color-second);
+    color: #fff;
+    border-radius: 25px;
+    padding: 35px;
+    margin-left: var(--gap-big);
+    margin-right: var(--gap-big);
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .dashboard-counters > h1 { 
-    font-size: 25px;
     margin-bottom: var(--gap-big);
 }
-
-.dashboard-counters > span { 
-    font-size: 25px;
-} 
