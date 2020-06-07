@@ -32,13 +32,33 @@
 }
 
 .follower #username {
-    margin-top: var(--gap-medium);
+    margin-top: var(--gap-small);
     font-size: 15px;
 }
 
 .follower #fullname {
     margin-top: var(--gap-medium);
     font-size: 30px;
+}
+
+.btn-unfollow {
+    background: linear-gradient(to right, var(--color-second) 50%, var(--color-fourth) 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+    width: 30%;
+    margin-top: var(--gap-small);
+    height: 35px;
+    transition: 0.2s ease-out all;
+    border-color: #fff;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-unfollow:hover {
+    color: #fff;
+    border-color: #fff;
+    background-position:left bottom;
 }
 
 .follower > .follower-information {
@@ -89,3 +109,4 @@
     width: 250px;
     height: 350px;
 }
+

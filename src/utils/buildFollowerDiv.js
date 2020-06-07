@@ -59,5 +59,12 @@ module.exports = {
             let loader = document.getElementById('loader');
             body.removeChild(loader);
         }
+    },
+
+    buildButtonUnfollow (){
+        let button = document.createElement('button');
+        button.className = 'btn-unfollow';
+        button.textContent = 'UNFOLLOW';
+        return button;
     }
 }

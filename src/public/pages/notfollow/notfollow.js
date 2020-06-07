@@ -41,11 +41,12 @@ const resources = require('../../../utils/resources');
     for ( let i = 0; i < notFollow.length ; i++) {
         
         let newDiv = createDiv.buildFollowerDiv(notFollow[i]);
-    
+        let followerDiv = newDiv.lastChild;
+        let button = createDiv.buildButtonUnfollow();
+        followerDiv.insertAdjacentHTML('beforeend', button.outerHTML );
         let [divNotFollow] = document.getElementsByClassName('container-followers')
     
         divNotFollow.insertAdjacentHTML('beforeend', newDiv.outerHTML);
 
     }
-
 })()
