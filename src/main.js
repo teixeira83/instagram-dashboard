@@ -15,7 +15,7 @@ function createWindow () {
   })
 
   win.setMenu(null);
-
+  win.maximize();
   // and load the index.html of the app.
   win.loadFile('./public/pages/home/home.html')
 

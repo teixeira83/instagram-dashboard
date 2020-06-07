@@ -7,17 +7,21 @@ module.exports = {
         newImg.src = person.profile_pic_url;
         
         let newSmallDiv = document.createElement('div');
-        
-        let newSpanUsername = document.createElement('span');
-        newSpanUsername.id = "boardUsername"
-        newSpanUsername.textContent = person.username;
+        newSmallDiv.className = 'follower-information';
         
         let newSpanName = document.createElement('span');
+        newSpanName.id = 'fullname';
         newSpanName.textContent = person.full_name;
+
+        let newSpanUsername = document.createElement('span');
+        newSpanUsername.id = "username";
+        newSpanUsername.textContent = `@${person.username}`;
+        
+        
     
         newBigDiv.appendChild(newImg);
-        newSmallDiv.appendChild(newSpanUsername);
         newSmallDiv.appendChild(newSpanName);
+        newSmallDiv.appendChild(newSpanUsername);
         newBigDiv.appendChild(newSmallDiv);
 
         return newBigDiv;

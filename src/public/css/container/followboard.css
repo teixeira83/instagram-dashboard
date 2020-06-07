@@ -22,14 +22,31 @@
     display: flex;
     margin-left: auto;
     margin-right: auto;
+    margin-top: var(--gap-medium);
 }
 
-.follower > div {
+.follower > img {
+    border-radius: 25px;
+    width: 150px;
+    height: 150px;
+}
+
+.follower #username {
+    margin-top: var(--gap-medium);
+    font-size: 15px;
+}
+
+.follower #fullname {
+    margin-top: var(--gap-medium);
+    font-size: 30px;
+}
+
+.follower > .follower-information {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+
 }
 
 .following-search {
