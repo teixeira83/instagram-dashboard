@@ -62,5 +62,9 @@ module.exports = {
         let pubs = user.edge_owner_to_timeline_media;   
         
         return pubs.edges;
+    },
+
+    async getUser() {
+        
     }
 }

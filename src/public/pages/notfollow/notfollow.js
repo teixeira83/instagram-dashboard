@@ -19,7 +19,6 @@ const resources = require('../../../utils/resources');
     const followings = await resources.getFollowings();
 
     let notFollow = [];
-    
     for (let i = 0; i < followings.length; i++) {
         let aux = 0
         
@@ -43,10 +42,11 @@ const resources = require('../../../utils/resources');
         let newDiv = createDiv.buildFollowerDiv(notFollow[i]);
         let followerDiv = newDiv.lastChild;
         let button = createDiv.buildButtonUnfollow();
-        followerDiv.insertAdjacentHTML('beforeend', button.outerHTML );
+        button.onclick = () => {
+            console.log('oi');
+        }
+        followerDiv.appendChild(button);
         let [divNotFollow] = document.getElementsByClassName('container-followers')
-    
-        divNotFollow.insertAdjacentHTML('beforeend', newDiv.outerHTML);
-
+        divNotFollow.appendChild(newDiv);
     }
 })()
