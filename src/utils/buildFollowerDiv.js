@@ -61,7 +61,7 @@ module.exports = {
 
     buildButtonUnfollow (){
         let button = document.createElement('button');
-        button.className = 'btn-unfollow';
+        button.className = 'mybtn';
         button.textContent = 'UNFOLLOW';
         return button;
     }

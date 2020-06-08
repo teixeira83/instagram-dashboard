@@ -1,24 +1,27 @@
-const { username, password } = require('dotenv').config().parsed;
+// const { username, password } = require('dotenv').config().parsed;
 const Instagram = require('instagram-web-api');
-const FileCookieStore = require('tough-cookie-filestore2');
-
-
-module.exports = {
-    async getClient() {
-        const cookieStore = await new FileCookieStore('./cookies.json');
-        const client = await new Instagram({ username, password, cookieStore });
-        return client;
+const fs = require('fs')
+module.exports = {    
+    async login(username, password) {
+        const client = new Instagram({ username, password });
+        const responseLogin = await client.login();
+        /*
+            fake login para nao ficar fazendo
+            requisicao toda hora para testar
+            o comportamento do programa
+        */
+       
+        // const fakeClient = fs.readFileSync('./src/resources/fakeClient.json').toString();
+        // const fakeResponseLogin = fs.readFileSync('./src/resources/fakeResponseLogin.json').toString();
+       /*
+        fim do fake client
+       */
+        // return [JSON.parse(fakeClient),JSON.parse(fakeResponseLogin)];
+        return [client,responseLogin];
     },
 
-    async login() {
-        let client = await this.getClient();
-        await client.login();
-        const me = await client.getUserByUsername({ username });
-        return me
-    },
-
-    async getFollowers(id) {
-        let client = await this.getClient();
+    async getFollowers(client) {
+        const id = client.credentials.id;
         let followers = [];
         let nextPage = true;
         let endCursor = '';
@@ -64,8 +67,18 @@ module.exports = {
         return pubs.edges;
     },
 
-    async getUser() {
-        
+    async getUser(client) {
+        const username = client.credentials.username;
+        const response = await client.getUserByUsername({ username });
+        const user = {
+            name: response.username,
+            pub: response.edge_owner_to_timeline_media.count,
+            followers: response.edge_followed_by.count,
+            following: response.edge_follow.count,
+            picture: response.profile_pic_url,
+            id: response.id
+        }
+        return user;
     },
 
     async unfollow(id) {

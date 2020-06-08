@@ -63,3 +63,7 @@
    border-bottom: 3px solid var(--color-second); 
    cursor: pointer;
 }
+
+.menu-list > li:last-child > a:hover{
+    border-bottom: 3px solid var(--color-fourth); 
+}

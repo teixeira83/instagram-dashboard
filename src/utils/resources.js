@@ -4,73 +4,60 @@ const operations = require('./operations');
 module.exports = {
         async getFollowers() {
             if (!fs.existsSync('./src/resources/followers.json')) {
-                await this.saveFollowers();
+                return false;
+            } else {
+                let followers = fs.readFileSync('./src/resources/followers.json').toString();
+                return JSON.parse(followers);
             }
-
-            let followers = fs.readFileSync('./src/resources/followers.json').toString();
-
-            return JSON.parse(followers);
         },
 
-        async saveFollowers() {
-
-            let userId = await this.getUserId();
-            let followers = await operations.getFollowers(userId);
-
+        async saveFollowers(client) {
+            if (fs.existsSync('./src/resources/followers.json')) {
+                fs.unlinkSync('./src/resources/followers.json');
+            }
+            const followers = await operations.getFollowers(client);
             fs.writeFileSync('./src/resources/followers.json', JSON.stringify(followers));
+            return true
         },
 
         async getFollowings() {
             if (!fs.existsSync('./src/resources/followings.json')) {
-                await this.saveFollowings();
+                console.log('Followings.json não encontrado, sincronizar novamente...');
+            } else {
+                let followings = fs.readFileSync('./src/resources/followings.json').toString();
+                return JSON.parse(followings);
             }
-
-            let followings = fs.readFileSync('./src/resources/followings.json').toString();
-
-            return JSON.parse(followings);
         },
 
         async saveFollowings() {
-            let userId = await this.getUserId();
-            let followings = await operations.getFollowings(userId);
-
+            if (fs.existsSync('./src/resources/followings.json')) {
+                fs.unlinkSync('./src/resources/followings.json');
+            }
+            const userId = await this.getUserId();
+            const followings = await operations.getFollowings(userId);
             fs.writeFileSync('./src/resources/followings.json', JSON.stringify(followings));
         },
 
         async getUserId() {
             let user = fs.readFileSync('./src/resources/user.json').toString();
-
             let userId = JSON.parse(user).id;
-
             return userId;
         },
 
-        async saveUserInfo() {
-
-            const user = await operations.login().then(res => {
-                let user = {
-                    name: res.username,
-                    pub: res.edge_owner_to_timeline_media.count,
-                    followers: res.edge_followed_by.count,
-                    following: res.edge_follow.count,
-                    picture: res.profile_pic_url,
-                    id: res.id
-                }
-
-                return user;
-            });
-
+        async saveUserInfo(user) {
+            if (fs.existsSync('./src/resources/user.json')) {
+                fs.unlinkSync('./src/resources/user.json');
+            } 
             fs.writeFileSync('./src/resources/user.json', JSON.stringify(user), 'utf8')
         },
 
         async getUserInfo() {
             if (!fs.existsSync('./src/resources/user.json')) {
-                await this.saveUserInfo();
+                console.log('User.json nao encontrado, sincronizar novamente...');
+            } else {
+                const user = fs.readFileSync('./src/resources/user.json').toString();
+                return JSON.parse(user);
             }
-
-            let user = fs.readFileSync('./src/resources/user.json').toString();
-
-            return JSON.parse(user);
         },
 
         async getFollowingByUsername(username){
@@ -89,46 +76,20 @@ module.exports = {
             return false;
         },
 
-        async synchronize() {
+        async synchronize(client) {
             let { buildLoader } = require('../utils/buildFollowerDiv');
             let loader = buildLoader.create();
             buildLoader.show(loader);
-            
+        
             console.log('Iniciando a sincronização com o instagram...');
-            if (fs.existsSync('./src/resources/user.json')) {
-                console.log('Apagando configurações antigas...');
-                fs.unlinkSync('./src/resources/user.json');
-                console.log('Salvando as configurações do usuário..');
-                await this.saveUserInfo();
-            } else {
-                console.log('Salvando as configurações do usuário..');
-                await this.saveUserInfo();
-            }
-            console.log('Configuração de usuário salva com sucesso.');
-            
-            if (fs.existsSync('./src/resources/followers.json')) {
-                console.log('Apagando configurações antigas...');
-                fs.unlinkSync('./src/resources/followers.json');
-                console.log('Salvando os followers..')
-                await this.saveFollowers();
-            } else {
-                console.log('Salvando os followers..')
-                await this.saveFollowers();
-            }
-            console.log('Followers salvo com sucesso.')
+            console.log('Salvando os followers..')
+            // await this.saveFollowers();
+            // console.log('Followers salvo com sucesso.')
+            // console.log('Salvando os followings..')
+            // await this.saveFollowings();
+            // console.log('Followings salvo com sucesso.')
+            // console.log('Sincronização realizada com sucesso.');
 
-            if (fs.existsSync('./src/resources/following.json')) {
-                console.log('Apagando configurações antigas...');
-                fs.unlinkSync('./src/resources/following.json');
-                console.log('Salvando os followings..')
-                await this.saveFollowings();
-            } else {
-                console.log('Salvando os followings..')
-                await this.saveFollowings();
-            }
-            console.log('Followings salvo com sucesso.')
-            
-            console.log('Sincronização realizada com sucesso.');
             buildLoader.dismiss(loader);
         }
 }

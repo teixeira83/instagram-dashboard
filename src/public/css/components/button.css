@@ -1,0 +1,19 @@
+.mybtn {
+    background: linear-gradient(to right, var(--color-second) 50%, var(--color-fourth) 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+    width: 30%;
+    margin-top: var(--gap-small);
+    height: 35px;
+    transition: 0.2s ease-out all;
+    border-color: #fff;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.mybtn:hover {
+    color: #fff;
+    border-color: #fff;
+    background-position:left bottom;
+}
