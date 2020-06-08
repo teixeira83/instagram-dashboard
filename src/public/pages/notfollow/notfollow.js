@@ -1,7 +1,7 @@
+const { buildLoader } = require('../../../utils/buildFollowerDiv');
 const createDiv = require('../../../utils/buildFollowerDiv');
 const resources = require('../../../utils/resources');
 const operations = require('../../../utils/operations');
-const { buildLoader } = require('../../../utils/buildFollowerDiv');
 
 ;(async () => {
 
@@ -54,7 +54,7 @@ const { buildLoader } = require('../../../utils/buildFollowerDiv');
     }
 
     async function unfollow(follower) {
-        let loader = buildLoader.create();
+        const loader = buildLoader.create();
         buildLoader.show(loader);
 
         let followerDiv = follower.path[1];
@@ -67,7 +67,9 @@ const { buildLoader } = require('../../../utils/buildFollowerDiv');
                 break;
             }
         }
-        let response = await operations.unfollow(id);
+        const localStorageClient = window.localStorage.getItem('client');
+        const client = JSON.parse(localStorageClient);
+        let response = await operations.unfollow(id,client);
         if(response) {
             for (const f of notFollow) {
                 if ( f.username == username) {

@@ -1,27 +1,18 @@
 // const { username, password } = require('dotenv').config().parsed;
 const Instagram = require('instagram-web-api');
-const fs = require('fs')
+
 module.exports = {    
     async login(username, password) {
         const client = new Instagram({ username, password });
         const responseLogin = await client.login();
-        /*
-            fake login para nao ficar fazendo
-            requisicao toda hora para testar
-            o comportamento do programa
-        */
-       
-        // const fakeClient = fs.readFileSync('./src/resources/fakeClient.json').toString();
-        // const fakeResponseLogin = fs.readFileSync('./src/resources/fakeResponseLogin.json').toString();
-       /*
-        fim do fake client
-       */
-        // return [JSON.parse(fakeClient),JSON.parse(fakeResponseLogin)];
         return [client,responseLogin];
     },
 
-    async getFollowers(client) {
-        const id = client.credentials.id;
+    async getFollowers(id,c) {
+        const username = c.credentials.username;
+        const password = c.credentials.password;    
+        const client = new Instagram({ username, password });
+        await client.login();
         let followers = [];
         let nextPage = true;
         let endCursor = '';
@@ -30,17 +21,20 @@ module.exports = {
             let responseFollowers = await client.getFollowers({ userId: id, first: 20, after: endCursor});
             nextPage = responseFollowers.page_info.has_next_page;
             endCursor = responseFollowers.page_info.end_cursor;
-
             for (f of responseFollowers.data) {
                 followers.push(f);
             }
+            await this.sleepRequest();
         }
 
         return followers;
     },
 
-    async getFollowings(id) {
-        let client = await this.getClient();
+    async getFollowings(id,c) {
+        const username = c.credentials.username;
+        const password = c.credentials.password;    
+        const client = new Instagram({ username, password });
+        await client.login();
         let followings = [];
         let nextPage = true;
         let endCursor = '';
@@ -49,19 +43,19 @@ module.exports = {
             let responseFollowings = await client.getFollowings({ userId: id, first: 20, after: endCursor});
             nextPage = responseFollowings.page_info.has_next_page;
             endCursor = responseFollowings.page_info.end_cursor;
-
             for (f of responseFollowings.data) {
                 followings.push(f);
             }
+            await this.sleepRequest();
         }
 
         return followings;
     },
 
     async getFeed(username) {
-        let client = await new Instagram({ username })
+        let client = new Instagram({ username })
         let user = await client.getUserByUsername({ username })
-        console.log(user)
+        
         let pubs = user.edge_owner_to_timeline_media;   
         
         return pubs.edges;
@@ -81,14 +75,21 @@ module.exports = {
         return user;
     },
 
-    async unfollow(id) {
-        let client = this.getClient();
+    async unfollow(id,c) {
+        const username = c.credentials.username;
+        const password = c.credentials.password;    
+        const client = new Instagram({ username, password });
+        await client.login();
         try {
-            await (await client).unfollow({ userId: id});
+            await client.unfollow({ userId: id});
             return true;
         }
         catch (err) {
             return false;
         }
+    },
+
+    async sleepRequest() {
+        await new Promise(r => setTimeout(r, 200));
     }
 }

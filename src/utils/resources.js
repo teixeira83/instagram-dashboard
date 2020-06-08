@@ -15,7 +15,8 @@ module.exports = {
             if (fs.existsSync('./src/resources/followers.json')) {
                 fs.unlinkSync('./src/resources/followers.json');
             }
-            const followers = await operations.getFollowers(client);
+            const userId = await this.getUserId();
+            const followers = await operations.getFollowers(userId, client);
             fs.writeFileSync('./src/resources/followers.json', JSON.stringify(followers));
             return true
         },
@@ -29,12 +30,12 @@ module.exports = {
             }
         },
 
-        async saveFollowings() {
+        async saveFollowings(client) {
             if (fs.existsSync('./src/resources/followings.json')) {
                 fs.unlinkSync('./src/resources/followings.json');
             }
             const userId = await this.getUserId();
-            const followings = await operations.getFollowings(userId);
+            const followings = await operations.getFollowings(userId,client);
             fs.writeFileSync('./src/resources/followings.json', JSON.stringify(followings));
         },
 
@@ -76,19 +77,21 @@ module.exports = {
             return false;
         },
 
-        async synchronize(client) {
-            let { buildLoader } = require('../utils/buildFollowerDiv');
-            let loader = buildLoader.create();
+        async synchronize() {
+            const localStorageClient = window.localStorage.getItem('client');
+            const client = JSON.parse(localStorageClient);
+            const { buildLoader } = require('../utils/buildFollowerDiv');
+            const loader = buildLoader.create();
             buildLoader.show(loader);
         
             console.log('Iniciando a sincronização com o instagram...');
             console.log('Salvando os followers..')
-            // await this.saveFollowers();
-            // console.log('Followers salvo com sucesso.')
-            // console.log('Salvando os followings..')
-            // await this.saveFollowings();
-            // console.log('Followings salvo com sucesso.')
-            // console.log('Sincronização realizada com sucesso.');
+            await this.saveFollowers(client);
+            console.log('Followers salvo com sucesso.')
+            console.log('Salvando os followings..')
+            await this.saveFollowings(client);
+            console.log('Followings salvo com sucesso.')
+            console.log('Sincronização realizada com sucesso.');
 
             buildLoader.dismiss(loader);
         }

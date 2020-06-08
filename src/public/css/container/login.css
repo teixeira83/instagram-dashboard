@@ -49,22 +49,26 @@ body {
 
 .login-input {
     width: 80%;
-    height: 25px;
+    height: 30px;
     border-radius: 25px;
     border-style: none;
     margin-top: var(--gap-small);
+    font-size: 20px;
+    text-align: center;
 }
 
 .form-login > button {
     margin-top: var(--gap-small);
 }
 
-label {
+.form-login label {
     color:  #fff;
     display: block;
-    font-size: 14px;
+    font-size: 22px;
+    font-weight: bold;
     height: 16px;
     margin-top: 20px;
+    margin-bottom: var(--gap-smaller);
 }
 
 .mybtn-login {

@@ -2,6 +2,9 @@
 @import '../settings/gaps.css';
 @import '../settings/colors.css';
 @import '../container/sidemenu.css';
+@import '../components/icons.css';
+@import '../components/loader.css';
+@import '../components/button.css';
 
 .followers {
     width: 100%;

@@ -1,9 +1,10 @@
 const resources = require('../../../utils/resources');
 
-;(async () => {
-    window.onload = loadCounters;    
-    const user = await resources.getUserInfo();
+window.onload = loadInformations;    
 
+async function loadInformations() {
+    const user = await resources.getUserInfo();
+    
     let imgProfile = document.getElementById('img-profile');
     let profileUsername = document.getElementById('profile-username');
     let username = document.getElementById('username');
@@ -17,11 +18,6 @@ const resources = require('../../../utils/resources');
     countPub.innerHTML = user.pub;
     countFollower.innerHTML = user.followers;
     countFollowing.innerHTML = user.following;
-    
-})()
-
-async function loadCounters() {
-    const user = await resources.getUserInfo();
     
     loadCounterPub(user.pub);
     loadCounterFollowers(user.followers);
