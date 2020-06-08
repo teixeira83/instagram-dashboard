@@ -41,7 +41,6 @@ module.exports = {
 
     buildLoader: {  
         create() {
-            console.log('criar')
             let loader = document.createElement('div');
             loader.className = 'loader';
             loader.id='loader'
@@ -49,7 +48,6 @@ module.exports = {
         },
         
         show(loader) {
-            console.log('show')
             let [body] = document.getElementsByTagName('body');
             body.insertAdjacentHTML('afterbegin', loader.outerHTML);
         },

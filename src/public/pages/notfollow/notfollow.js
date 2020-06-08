@@ -1,6 +1,7 @@
 const createDiv = require('../../../utils/buildFollowerDiv');
 const resources = require('../../../utils/resources');
-
+const operations = require('../../../utils/operations');
+const { buildLoader } = require('../../../utils/buildFollowerDiv');
 
 ;(async () => {
 
@@ -36,17 +37,55 @@ const resources = require('../../../utils/resources');
         aux = 0;
         
     }
-
-    for ( let i = 0; i < notFollow.length ; i++) {
+    loadFollowings();
+    async function loadFollowings() {
+        await cleanFollowings();
         
-        let newDiv = createDiv.buildFollowerDiv(notFollow[i]);
-        let followerDiv = newDiv.lastChild;
-        let button = createDiv.buildButtonUnfollow();
-        button.onclick = () => {
-            console.log('oi');
+        for ( let i = 0; i < notFollow.length ; i++) {
+            
+            let newDiv = createDiv.buildFollowerDiv(notFollow[i]);
+            let followerDiv = newDiv.lastChild;
+            let button = createDiv.buildButtonUnfollow();
+            button.onclick = unfollow;
+            followerDiv.appendChild(button);
+            let [divNotFollow] = document.getElementsByClassName('container-followers')
+            divNotFollow.appendChild(newDiv);
         }
-        followerDiv.appendChild(button);
-        let [divNotFollow] = document.getElementsByClassName('container-followers')
-        divNotFollow.appendChild(newDiv);
+    }
+
+    async function unfollow(follower) {
+        let loader = buildLoader.create();
+        buildLoader.show(loader);
+
+        let followerDiv = follower.path[1];
+        let username = followerDiv.children[1].textContent;
+        username = username.replace('@', '');
+        let id
+        for (const f of notFollow) {
+            if ( f.username == username) {
+                id = f.id;
+                break;
+            }
+        }
+        let response = await operations.unfollow(id);
+        if(response) {
+            for (const f of notFollow) {
+                if ( f.username == username) {
+                    notFollow.splice(notFollow.indexOf(f),1)
+                    loadFollowings();
+                    break;
+                }
+            }   
+        } else {
+            alert('Ocorreu um erro, favor tentar novamente...');
+        }
+        buildLoader.dismiss(loader);
+    }
+
+    function cleanFollowings() {
+        let [containerFollowing] = document.getElementsByClassName('container-followers');
+        while (containerFollowing.firstChild) {
+            containerFollowing.removeChild(containerFollowing.firstChild);
+        }
     }
 })()

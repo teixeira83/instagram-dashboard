@@ -66,5 +66,16 @@ module.exports = {
 
     async getUser() {
         
+    },
+
+    async unfollow(id) {
+        let client = this.getClient();
+        try {
+            await (await client).unfollow({ userId: id});
+            return true;
+        }
+        catch (err) {
+            return false;
+        }
     }
 }
